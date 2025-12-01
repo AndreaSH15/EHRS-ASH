@@ -1,0 +1,12 @@
+---
+title: "README"
+author: "Andrea_Sanchez_Hidalgo"
+date: "2025-12-01"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This file contains the instructions for homework 5. 
