@@ -9,7 +9,13 @@ The purpose of this HW is learn to commmit to GIthub in R.
 
 ## Requirements or Packages
 
-## Instructions
-Explain how to run the analysis or scripts.
+#library(dplyr)
+#library(ggplot2)
+#library(tidyr)
+#library(tidyverse)
+#library(lubridate)
+
+## Bibliography
+Some information was taken from Wikipedia and credit was given.
 
 
