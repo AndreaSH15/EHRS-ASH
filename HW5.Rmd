@@ -2,7 +2,9 @@
 title: "Homework_5"
 author: "Andrea_Sanchez_Hidalgo"
 date: "2025-12-01"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -84,7 +86,7 @@ Source: https://en.wikipedia.org/wiki/Killing_of_Freddie_Gray
 Note: As he was not in the data set obtained, the date of the arrest used on this exercise (April 12, 2015) was taken from Wikipedia.
 
 
-```{r}
+```{r, Graph}
 
 ##Fix year of dataset
 homicides_plotdata <- homicides_baltimore %>%
@@ -126,4 +128,6 @@ ggplot(homicides_plotdata, aes(x = date, y = homicides)) +
            label = "Arrest of Freddy Gray", color = "white", angle = 0, vjust = -0.1)
 ```
 
+
+```
 
