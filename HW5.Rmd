@@ -33,12 +33,40 @@ writeLines(readme_text, 'README.md')
 ```
 
 
-```
 ```{r, Recreating a graph}
 ##It shows monthly homicides in Baltimore, with a reference added for the date of the arrest of Freddie Gray and color used to show colder months (November through April) versus warmer months (May through October). There is a smooth line added to help show seasonal and long-term trends in this data.
 
-##Identify data from baltimore
+##Library load
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(tidyverse)
+library(lubridate)
 
+##read file
+getwd()
+homicides <- read.csv ("https://raw.githubusercontent.com/AndreaSH15/EHRS-ASH/refs/heads/main/homicide-data.csv")
 
+View(homicides)
+str(homicides)
+
+##extract infromation from Baltimore
+homicides_baltimore <- homicides %>%
+  filter(city == "Baltimore") %>%
+  mutate(
+    reported_date = ymd(reported_date),
+    year = year(reported_date),
+    month = month(reported_date),
+    season = if_else(month %in% c(11,12,1,2,3,4), "colder", "warmer")
+  ) %>%
+  group_by(year, month, season, disposition) %>%
+  summarise(homicides = n(), .groups = "drop")
+
+homicides_baltimore_monthly <- homicides_baltimore %>%
+  group_by(year, month, season) %>%
+  summarise(total_homicides = sum(homicides), .groups = "drop")
+
+View(homicides_baltimore)
 ```
 
+##Freddie Gray
