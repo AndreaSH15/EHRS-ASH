@@ -70,3 +70,14 @@ View(homicides_baltimore)
 ```
 
 ##Freddie Gray
+
+Interestingly, this database does not contain the name of Freddy Gray as a victim, however, according to Wikipedia, he was arrested on April 12, 2015, for possession of a knife, however, he was attacked by police officers on the same date and died in R Adams Cowley Shock Trauma Center. Gray's death on April 19, 2015, was ascribed to injuries to his cervical spinal cord. 
+
+Source: https://en.wikipedia.org/wiki/Killing_of_Freddie_Gray
+
+Note: As he was not in the dataset obtained, the date of the arrest used on this excercise (April 12, 2015) was taken from Wikipedia.
+
+```{r, replication of the graph}
+
+```
+
