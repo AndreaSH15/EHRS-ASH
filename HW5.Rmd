@@ -22,9 +22,14 @@ This README file contain instructions for HW5.
 The purpose of this HW is learn to commmit to GIthub in R.
 
 ## Requirements or Packages
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(tidyverse)
+library(lubridate)
 
-## Instructions
-Explain how to run the analysis or scripts.
+## Bibliography
+Some information was taken from Wikipedia and credit was given.
 
 "
 
@@ -75,9 +80,49 @@ Interestingly, this database does not contain the name of Freddy Gray as a victi
 
 Source: https://en.wikipedia.org/wiki/Killing_of_Freddie_Gray
 
-Note: As he was not in the dataset obtained, the date of the arrest used on this excercise (April 12, 2015) was taken from Wikipedia.
+Note: As he was not in the data set obtained, the date of the arrest used on this exercise (April 12, 2015) was taken from Wikipedia.
 
-```{r, replication of the graph}
 
+```{r}
+
+##Fix year of dataset
+homicides_plotdata <- homicides_baltimore %>%
+  mutate(
+    date = ymd(paste(year, month, "01", sep = "-"))
+  ) %>%
+  group_by(date, season) %>%
+  summarise(homicides = sum(homicides), .groups = "drop")
+
+##Check
+View(homicides_plotdata)
+
+# Wikipedia Freddy Gray arrest
+freddy_date <- ymd("2015-04-12") 
+
+##Graph
+
+ggplot(homicides_plotdata, aes(x = date, y = homicides)) +
+  geom_col(aes(fill = season), alpha = 0.75) +
+  geom_smooth(se = FALSE, color = "blue", size = 1.0, span = 0.1) +
+  scale_fill_manual(values = c("colder" = "lightblue", "warmer" = "grey70")) +
+  scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
+  labs(
+    title = "Homicides in Baltimore",
+    x = "Year",
+    y = "Monthly homicides",
+    fill = ""
+  ) +
+  theme_minimal(base_size = 13) +  # first apply theme_minimal
+  theme(
+    panel.background = element_rect(fill = "grey40", color = NA), # now this works
+    legend.position = "bottom",
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_blank()
+  ) +
+  geom_vline(xintercept = freddy_date, color = "red", linetype = "dashed", size = 1) +
+  # Add text label
+  annotate("text", x = freddy_date, y = max(homicides_plotdata$homicides) * 0.95,
+           label = "Arrest of Freddy Gray", color = "white", angle = 0, vjust = -0.1)
 ```
+
 
